@@ -22,6 +22,7 @@ export default function UserProvider({ children }) {
       setUser({ user: credentials.username, token });
       setIsLogged(true);
     }
+    return token;
   }
 
   async function logOut() {

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import UserContext from '../context/UserContext';
 
 export default function Header() {
-  const [user, isLogged, logOut] = useContext(UserContext);
+  const { user, isLogged, logOut } = useContext(UserContext);
   const { username } = user;
   const navigate = useNavigate();
 
