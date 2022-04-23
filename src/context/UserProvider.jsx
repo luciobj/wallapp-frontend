@@ -11,11 +11,8 @@ export default function UserProvider({ children }) {
 
   useEffect(() => {
     if (sessionData) {
-      const { user: sessionUser, token: sessionToken } = JSON.parse(sessionData);
-      if (sessionUser && sessionToken) {
-        setUser({ user: sessionUser, token: sessionToken });
-        setIsLogged(true);
-      }
+      setUser({ user: sessionData.user, token: sessionData.token });
+      setIsLogged(true);
     }
   }, []);
 
