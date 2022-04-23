@@ -73,11 +73,6 @@ export default function Login() {
     <div className="main-container">
       <Header />
       <div>
-        <div hidden={hidden}>
-          <span>
-            {errorMessage}
-          </span>
-        </div>
         <form>
           <h1>Login</h1>
           <span>Username</span>
@@ -98,6 +93,11 @@ export default function Login() {
           />
           <button type="button" onClick={handleClick}>Sign In</button>
         </form>
+      </div>
+      <div hidden={hidden}>
+        <span>
+          {errorMessage}
+        </span>
       </div>
     </div>
   );
