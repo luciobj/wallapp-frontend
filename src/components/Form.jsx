@@ -89,7 +89,7 @@ export default function Form({ handleEdit }) {
           />
         </label>
         <div>
-          <button type="button" onClick={handleSubmit}>Add</button>
+          <button type="button" onClick={handleSubmit}>{PostItForm.id !== 0 ? 'Edit' : 'Add'}</button>
         </div>
       </form>
     </>

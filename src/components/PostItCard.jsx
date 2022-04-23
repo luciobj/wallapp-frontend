@@ -4,19 +4,19 @@ import UserContext from '../context/UserContext';
 import PostItContext from '../context/PostItContext';
 
 export default function PostItCard({
-  postit, handleDelete,
+  postIt, handleDelete,
 }) {
-  const { id, title, description } = postit;
+  const { id, title, description } = postIt;
   const [expand, setExpand] = useState(true);
   const { setPostItForm } = useContext(PostItContext);
-  const { user: { token } } = useContext(UserContext);
+  const { user: { token }, isLogged } = useContext(UserContext);
 
   function handleExpand() {
     setExpand(!expand);
   }
 
   function handleEdit() {
-    setPostItForm(postit);
+    setPostItForm(postIt);
     setExpand(!expand);
   }
 
@@ -27,7 +27,7 @@ export default function PostItCard({
 
   return (
     <div id={`${id}-postit-card`} key={`${id}-postit-card`}>
-      <div>
+      <div hidden={!isLogged}>
         <button type="button" onClick={handleExpand}>...</button>
       </div>
       <div hidden={expand}>
@@ -43,7 +43,7 @@ export default function PostItCard({
 }
 
 PostItCard.propTypes = {
-  postit: PropTypes.shape({
+  postIt: PropTypes.shape({
     id: PropTypes.number,
     title: PropTypes.string,
     description: PropTypes.string,
