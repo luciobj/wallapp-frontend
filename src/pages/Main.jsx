@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router';
 import {
-  getPostItList,
+  getPostItList, postPostIt, putPostIt, deletePostIt,
 } from '../helpers';
 import UserContext from '../context/UserContext';
 import Header from '../components/Header';
@@ -14,24 +13,52 @@ export default function Main() {
   const { user, isLogged } = useContext(UserContext);
   const [errorMessage, setErrorMessage] = useState('');
   const [hidden, alterHidden] = useState(true);
-  const navigate = useNavigate();
-  // const TWO_SECONDS = 2000;
+  const TWO_SECONDS = 2000;
 
   async function updatePostIts(token) {
     setIsLoading(true);
-    const filmsList = await getPostItList(token);
-    if (filmsList.length) {
+    const PostItList = await getPostItList(token);
+    if (PostItList.length) {
       setIsLoading(false);
-      setPostIts(filmsList);
+      setPostIts(PostItList);
     }
   }
 
-  useEffect(() => {
-    if (isLogged) {
-      updatePostIts(user.token);
+  const handleEdit = async (postIt, token, id = 0) => {
+    let error = false;
+    if (id === 0) {
+      const { error: fetchError } = await postPostIt(postIt, token);
+      error = fetchError;
     } else {
-      navigate('/signin', { replace: true });
+      const { error: fetchError } = await putPostIt(id, postIt, token);
+      error = fetchError;
     }
+    if (!error) {
+      setErrorMessage(error);
+      alterHidden(false);
+      setTimeout(() => {
+        alterHidden(true);
+      }, TWO_SECONDS);
+      return;
+    }
+    updatePostIts(token);
+  };
+
+  const handleDelete = async (id, token) => {
+    const { error } = await deletePostIt(id, token);
+    if (error) {
+      setErrorMessage(error);
+      alterHidden(false);
+      setTimeout(() => {
+        alterHidden(true);
+      }, TWO_SECONDS);
+      return;
+    }
+    updatePostIts(token);
+  };
+
+  useEffect(() => {
+    updatePostIts(user.token);
   }, []);
 
   return (
@@ -39,16 +66,19 @@ export default function Main() {
       <Header />
       { isLogged
       && (
-        <Form />
+        <Form
+          handleEdit={handleEdit}
+        />
       ) }
       { isLoading
         ? (
           <div>Your list is Empty!</div>
         ) : (
           <div>
-            { postIts && postIts.map((postItInfo) => (
+            { postIts.length > 1 && postIts.map((postItInfo) => (
               <PostItCard
                 postIt={postItInfo}
+                handleDelete={handleDelete}
                 key={postItInfo.id}
               />
             )) }
