@@ -1,86 +1,69 @@
+import axios from 'axios';
+
 const BASE_URL = 'http://localhost:8000/';
 
 export async function getPostItList() {
   try {
-    const result = await fetch(`${BASE_URL}api/get/`);
-    return await result.json();
+    const response = await axios.get(`${BASE_URL}api/get/`);
+    return response.data;
   } catch (error) {
-    console.log(error);
+    return error;
   }
 }
 
 export async function postUser(user) {
   try {
-    const result = await fetch(`${BASE_URL}user/`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(user),
-    });
-    return await result.json();
+    const response = await axios.post(`${BASE_URL}/users/`, user);
+    return response.data;
   } catch (error) {
-    console.log(error);
+    return error;
   }
 }
 
 export async function authUser(user) {
   try {
-    const result = await fetch(`${BASE_URL}auth/`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(user),
-    });
-    return await result.json();
+    const response = await axios.post(`${BASE_URL}/auth/`, user);
+    return response.data;
   } catch (error) {
-    console.log(error);
+    return error;
   }
 }
 
 export async function postPostIt(postIt, token) {
   try {
-    const result = await fetch(`${BASE_URL}api/postit/`, {
-      method: 'POST',
+    const response = await axios.post(`${BASE_URL}api/postit/`, postIt, {
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Token ${token}`,
+        Authorization: `Token ${token}`,
       },
-      body: JSON.stringify(postIt),
     });
-    return await result.json();
+    return response.data;
   } catch (error) {
-    console.log(error);
+    return error;
   }
 }
 
 export async function putPostIt(id, postIt, token) {
   try {
-    const result = await fetch(`${BASE_URL}api/postit/${id}/`, {
-      method: 'PUT',
+    const response = await axios.put(`${BASE_URL}api/postit/${id}/`, postIt, {
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Token ${token}`,
+        Authorization: `Token ${token}`,
       },
-      body: JSON.stringify(postIt),
     });
-    return await result.json();
+    return response.data;
   } catch (error) {
-    console.log(error);
+    return error;
   }
 }
 
 export async function deletePostIt(id, token) {
   try {
-    const result = await fetch(`${BASE_URL}api/postit/${id}/`, {
-      method: 'DELETE',
+    const response = await axios.delete(`${BASE_URL}api/postit/${id}/`, {
       headers: {
-        'Authorization': `Token ${token}`,
+        Authorization: `Token ${token}`,
       },
     });
-    return await result.json();
+    return response.data;
   } catch (error) {
-    console.log(error);
+    return error;
   }
 }
