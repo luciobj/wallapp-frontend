@@ -13,7 +13,7 @@ export async function getPostItList() {
 
 export async function postUser(user) {
   try {
-    const response = await axios.post(`${BASE_URL}/users/`, user);
+    const response = await axios.post(`${BASE_URL}users/`, user);
     return response.data;
   } catch (error) {
     return error;
@@ -22,7 +22,7 @@ export async function postUser(user) {
 
 export async function authUser(user) {
   try {
-    const response = await axios.post(`${BASE_URL}/auth/`, user);
+    const response = await axios.post(`${BASE_URL}auth/`, user);
     return response.data;
   } catch (error) {
     return error;
