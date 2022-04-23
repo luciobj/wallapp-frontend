@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import PostItContext from './PostItContext';
 
 export default function PostItProvider({ children }) {
-  const [PostIt, setPostIt] = useState({
+  const [PostItForm, setPostItForm] = useState({
     title: '',
     description: '',
   });
@@ -12,13 +12,13 @@ export default function PostItProvider({ children }) {
 
   useEffect(() => {
     if (sessionPostIt) {
-      setPostIt(JSON.parse(sessionPostIt));
+      setPostItForm(JSON.parse(sessionPostIt));
     }
   }, []);
 
   const contextValue = {
-    PostIt,
-    setPostIt,
+    PostItForm,
+    setPostItForm,
   };
 
   const value = useMemo(() => contextValue, [contextValue]);
