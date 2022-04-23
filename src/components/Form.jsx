@@ -9,7 +9,7 @@ export default function Form({ handleEdit }) {
   const [error, setError] = useState('');
   const [hidden, alterHidden] = useState(true);
   const { PostItForm, setPostItForm } = useContext(PostItContext);
-  const { token } = useContext(UserContext);
+  const { user: { token } } = useContext(UserContext);
   const TWO_SECONDS = 2000;
 
   const handleChange = ({ target }) => {
@@ -47,7 +47,7 @@ export default function Form({ handleEdit }) {
         description,
       };
       if (PostItForm.id !== 0) {
-        handleEdit(PostItForm.id, postIt, token);
+        handleEdit(postIt, token, PostItForm.id);
       } else {
         handleEdit(postIt, token);
       }

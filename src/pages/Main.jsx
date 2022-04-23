@@ -33,7 +33,7 @@ export default function Main() {
       const { error: fetchError } = await putPostIt(id, postIt, token);
       error = fetchError;
     }
-    if (!error) {
+    if (error) {
       setErrorMessage(error);
       alterHidden(false);
       setTimeout(() => {
