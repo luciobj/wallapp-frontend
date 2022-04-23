@@ -7,12 +7,15 @@ export default function UserProvider({ children }) {
   const [user, setUser] = useState('');
   const [isLogged, setIsLogged] = useState(false);
 
-  const sessionUser = sessionStorage.getItem('user');
+  const sessionData = sessionStorage.getItem('user');
 
   useEffect(() => {
-    if (sessionUser) {
-      setUser(JSON.parse(sessionUser));
-      setIsLogged(true);
+    if (sessionData) {
+      const { user: sessionUser, token: sessionToken } = JSON.parse(sessionData);
+      if (sessionUser && sessionToken) {
+        setUser({ user: sessionUser, token: sessionToken });
+        setIsLogged(true);
+      }
     }
   }, []);
 
@@ -21,6 +24,7 @@ export default function UserProvider({ children }) {
     if (token) {
       setUser({ user: credentials.username, token });
       setIsLogged(true);
+      sessionStorage.setItem('user', JSON.stringify({ user: credentials.username, token }));
     }
     return token;
   }
@@ -28,6 +32,7 @@ export default function UserProvider({ children }) {
   async function logOut() {
     setUser('');
     setIsLogged(false);
+    sessionStorage.clear();
   }
 
   const contextValue = {

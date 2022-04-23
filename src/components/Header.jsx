@@ -5,7 +5,7 @@ import UserContext from '../context/UserContext';
 
 export default function Header() {
   const { user, isLogged, logOut } = useContext(UserContext);
-  const { username } = user;
+  const { user: username } = user;
   const navigate = useNavigate();
 
   function handleClick() {

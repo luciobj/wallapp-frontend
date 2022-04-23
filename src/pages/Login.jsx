@@ -59,13 +59,12 @@ export default function Login() {
       }, TWO_SECONDS);
       return;
     }
-    sessionStorage.setItem('user', { username, token });
-    navigate('/home', { replace: true });
+    navigate('/', { replace: true });
   }
 
   useEffect(() => {
     if (isLogged) {
-      navigate('/home', { replace: true });
+      navigate('/', { replace: true });
     }
   }, []);
 

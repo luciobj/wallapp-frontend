@@ -4,6 +4,7 @@ import PostItContext from './PostItContext';
 
 export default function PostItProvider({ children }) {
   const [PostItForm, setPostItForm] = useState({
+    id: 0,
     title: '',
     description: '',
   });
