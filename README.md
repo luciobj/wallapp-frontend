@@ -6,7 +6,9 @@ This is an app for displaying information in a post it wall. It was built with `
 
 The unauth/unlogged guest may read the post its, create a user or log in, while the authed/logged user can handle basic **CRUD** (create, read, update and delete) operations for the post its.
 
-The backend of this application can be found [here](https://github.com/luciobj/Wallapp-backend)
+The backend of this application can be found [here](https://github.com/luciobj/Wallapp-backend).
+
+The design of this application is based on [this figma](https://www.figma.com/file/6XyCxqYVUcAl7R7B3tqBgR/Wall-App?node-id=0%3A1).
 
 ## Requirements
 
