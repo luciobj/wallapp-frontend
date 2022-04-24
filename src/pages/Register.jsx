@@ -1,3 +1,4 @@
+import { TextField, Button } from '@mui/material';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
@@ -8,6 +9,10 @@ export default function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
+  const [usernameError, setUsernameError] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [password2Error, setPassword2Error] = useState('');
   const [error, setError] = useState('');
   const [hidden, alterHidden] = useState(true);
   const [success, setSuccess] = useState(true);
@@ -15,43 +20,59 @@ export default function Register() {
   const navigate = useNavigate();
   const TWO_SECONDS = 2000;
 
-  function verifyInputs() {
-    const regex = /\S+@\S+\.\S+/;
-    const minPasswordLength = 6;
-    if (password !== passwordConfirmation) {
-      setError('Passwords do not match');
-      alterHidden(false);
-      setTimeout(() => {
-        alterHidden(true);
-      }, TWO_SECONDS);
-    } else if (!email.match(regex)) {
-      setError('Email is not valid');
-      alterHidden(false);
-      setTimeout(() => {
-        alterHidden(true);
-      }, TWO_SECONDS);
-    } else if (password.length < minPasswordLength) {
-      setError('Password must be at least 6 characters');
-      alterHidden(false);
-      setTimeout(() => {
-        alterHidden(true);
-      }, TWO_SECONDS);
+  const verifyUsername = () => {
+    if (username.length < 1) {
+      setUsernameError('Username is required');
     } else {
+      setUsernameError('');
       return true;
     }
     return false;
-  }
+  };
 
-  function resetStates() {
+  const verifyEmail = () => {
+    const regex = /\S+@\S+\.\S+/;
+    if (email.length < 1) {
+      setEmailError('Email is required');
+    } else if (!email.match(regex)) {
+      setEmailError('Email is not valid');
+    } else {
+      setEmailError('');
+      return true;
+    }
+    return false;
+  };
+
+  const verifyPasswords = () => {
+    if (password.length < 6) {
+      setPasswordError('Password must be at least 6 characters');
+    } else if (password !== passwordConfirmation) {
+      setPassword2Error('Passwords do not match');
+    } else {
+      setPasswordError('');
+      setPassword2Error('');
+      return true;
+    }
+    return false;
+  };
+
+  const verifyInputs = () => {
+    if (verifyUsername() && verifyEmail() && verifyPasswords()) {
+      return true;
+    }
+    return false;
+  };
+
+  const resetStates = () => {
     setUsername('');
     setEmail('');
     setPassword('');
     setPasswordConfirmation('');
     setError('');
     setSuccess(false);
-  }
+  };
 
-  function handleChange({ target }) {
+  const handleChange = ({ target }) => {
     if (target.name === 'username') {
       setUsername(target.value);
     } else if (target.name === 'email') {
@@ -61,7 +82,7 @@ export default function Register() {
     } else if (target.name === 'passwordConfirmation') {
       setPasswordConfirmation(target.value);
     }
-  }
+  };
 
   const handleClick = async () => {
     if (verifyInputs()) {
@@ -92,45 +113,57 @@ export default function Register() {
   return (
     <div className="main-container">
       <Header />
-      <div>
+      <div className="register-form">
         <form>
-          <h1>Sign Up</h1>
-          <span>Username</span>
-          <input
+          <h1>Register</h1>
+          <TextField
             name="username"
-            placeholder="myuser"
+            label="Username"
+            variant="outlined"
             value={username}
             onChange={handleChange}
+            error={usernameError !== ''}
+            helperText={usernameError}
             disabled={disabled}
           />
-          <span>Email</span>
-          <input
+          <TextField
             name="email"
-            type="email"
-            placeholder="email@email.com"
+            label="email@email.com"
+            variant="outlined"
             value={email}
             onChange={handleChange}
+            error={emailError !== ''}
+            helperText={emailError}
             disabled={disabled}
           />
-          <span>Password</span>
-          <input
+          <TextField
             name="password"
             type="password"
-            placeholder="*****"
+            label="Password"
+            variant="outlined"
             value={password}
             onChange={handleChange}
+            error={passwordError !== ''}
+            helperText={passwordError}
             disabled={disabled}
           />
-          <span>Confirm password</span>
-          <input
-            name="passwordConfirmation"
+          <TextField
+            name="password"
             type="password"
-            placeholder="*****"
+            label="Confirm Password"
+            variant="outlined"
             value={passwordConfirmation}
             onChange={handleChange}
+            error={password2Error !== ''}
+            helperText={password2Error}
             disabled={disabled}
           />
-          <button type="button" onClick={handleClick}>Register</button>
+          <Button
+            variant="contained"
+            onClick={handleClick}
+          >
+            Sign up
+          </Button>
         </form>
       </div>
       <div hidden={hidden}>

@@ -1,16 +1,17 @@
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import Button from '@mui/material/Button';
+import { TextField } from '@mui/material';
 import PostItContext from '../context/PostItContext';
 import UserContext from '../context/UserContext';
 
 export default function Form({ handleEdit }) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [error, setError] = useState('');
-  const [hidden, alterHidden] = useState(true);
+  const [titleError, setTitleError] = useState('');
+  const [descriptionError, setDescriptionError] = useState('');
   const { PostItForm, setPostItForm } = useContext(PostItContext);
   const { user: { token } } = useContext(UserContext);
-  const TWO_SECONDS = 2000;
 
   const handleChange = ({ target }) => {
     if (target.name === 'title') {
@@ -23,24 +24,22 @@ export default function Form({ handleEdit }) {
 
   function verifyInputs() {
     if (title === '') {
-      setError('Title cannot be empty');
-      alterHidden(false);
-      setTimeout(() => {
-        alterHidden(true);
-      }, TWO_SECONDS);
-    } else if (description === '') {
-      setError('Description cannot be empty');
-      alterHidden(false);
-      setTimeout(() => {
-        alterHidden(true);
-      }, TWO_SECONDS);
+      setTitleError('Title cannot be empty');
     } else {
+      setTitleError('');
+    }
+    if (description === '') {
+      setDescriptionError('Description cannot be empty');
+    } else {
+      setDescriptionError('');
+    }
+    if (title !== '' && description !== '') {
       return true;
     }
     return false;
   }
 
-  function handleSubmit() {
+  const handleSubmit = () => {
     if (verifyInputs()) {
       const postIt = {
         title,
@@ -57,7 +56,7 @@ export default function Form({ handleEdit }) {
         description: '',
       });
     }
-  }
+  };
 
   useEffect(() => {
     setTitle(PostItForm.title);
@@ -65,34 +64,38 @@ export default function Form({ handleEdit }) {
   }, [PostItForm, setTitle, setDescription]);
 
   return (
-    <>
-      <div hidden={hidden}>
-        <span>
-          {error}
-        </span>
-      </div>
+    <div className="forms-container">
       <form>
-        <label htmlFor="description">
-          <input
-            name="title"
-            placeholder="Title"
-            value={title}
-            onChange={handleChange}
-          />
-        </label>
-        <label htmlFor="description">
-          <textarea
-            name="description"
-            placeholder="Description"
-            value={description}
-            onChange={handleChange}
-          />
-        </label>
+        <TextField
+          name="title"
+          label="Title"
+          variant="outlined"
+          value={title}
+          onChange={handleChange}
+          error={titleError !== ''}
+          helperText={titleError}
+        />
+        <TextField
+          name="description"
+          label="description"
+          variant="outlined"
+          value={description}
+          onChange={handleChange}
+          error={descriptionError !== ''}
+          helperText={descriptionError}
+        />
         <div>
-          <button type="button" onClick={handleSubmit}>{PostItForm.id !== 0 ? 'Edit' : 'Add'}</button>
+          <Button
+            variant="contained"
+            onClick={handleSubmit}
+            className="forms-button"
+            size="small"
+          >
+            {PostItForm.id !== 0 ? 'Edit' : 'Add'}
+          </Button>
         </div>
       </form>
-    </>
+    </div>
   );
 }
 

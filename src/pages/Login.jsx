@@ -1,3 +1,4 @@
+import { TextField, Button } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import Header from '../components/Header';
@@ -6,43 +7,42 @@ import UserContext from '../context/UserContext';
 export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [usernameError, setUsernameError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [hidden, alterHidden] = useState(true);
   const { isLogged, logIn } = useContext(UserContext);
   const navigate = useNavigate();
   const TWO_SECONDS = 2000;
 
-  function handleChange({ target }) {
+  const handleChange = ({ target }) => {
     if (target.name === 'username') {
       setUsername(target.value);
     }
     if (target.name === 'password') {
       setPassword(target.value);
     }
-  }
+  };
 
-  function verifyInputs() {
+  const verifyInputs = () => {
     const minPasswordLength = 6;
     if (username.length < 1) {
-      setErrorMessage('Username is required');
-      alterHidden(false);
-      setTimeout(() => {
-        alterHidden(true);
-      }, TWO_SECONDS);
-      return false;
+      setUsernameError('Username is required');
+    } else {
+      setUsernameError('');
     }
     if (password.length < minPasswordLength) {
-      setErrorMessage('Passwords must be at least 6 characters');
-      alterHidden(false);
-      setTimeout(() => {
-        alterHidden(true);
-      }, TWO_SECONDS);
-      return false;
+      setPasswordError('Passwords must be at least 6 characters');
+    } else {
+      setPasswordError('');
     }
-    return true;
-  }
+    if (username.length > 0 && password.length >= minPasswordLength) {
+      return true;
+    }
+    return false;
+  };
 
-  async function handleClick() {
+  const handleClick = async () => {
     if (!verifyInputs()) {
       return;
     }
@@ -60,7 +60,7 @@ export default function Login() {
       return;
     }
     navigate('/', { replace: true });
-  }
+  };
 
   useEffect(() => {
     if (isLogged) {
@@ -71,26 +71,34 @@ export default function Login() {
   return (
     <div className="main-container">
       <Header />
-      <div>
+      <div className="login-form">
         <form>
           <h1>Login</h1>
-          <span>Username</span>
-          <input
+          <TextField
             name="username"
-            type="username"
-            placeholder="NeyTheBoy"
+            label="Username"
+            variant="outlined"
             value={username}
             onChange={handleChange}
+            error={usernameError !== ''}
+            helperText={usernameError}
           />
-          <span>Password</span>
-          <input
+          <TextField
             name="password"
             type="password"
-            placeholder="******"
+            label="Password"
+            variant="outlined"
             value={password}
             onChange={handleChange}
+            error={passwordError !== ''}
+            helperText={passwordError}
           />
-          <button type="button" onClick={handleClick}>Sign In</button>
+          <Button
+            variant="contained"
+            onClick={handleClick}
+          >
+            Sign In
+          </Button>
         </form>
       </div>
       <div hidden={hidden}>

@@ -18,6 +18,7 @@ export default function Main() {
   async function updatePostIts(token) {
     setIsLoading(true);
     const PostItList = await getPostItList(token);
+    PostItList.sort((a, b) => a.id - b.id);
     if (PostItList.length) {
       setIsLoading(false);
       setPostIts(PostItList);
@@ -74,7 +75,7 @@ export default function Main() {
         ? (
           <div>Your list is Empty!</div>
         ) : (
-          <div>
+          <div className="postit-container">
             { postIts.length > 1 && postIts.map((postItInfo) => (
               <PostItCard
                 postIt={postItInfo}

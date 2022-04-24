@@ -1,36 +1,56 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
+import { Button } from '@mui/material';
 import UserContext from '../context/UserContext';
+import tslLogo from '../assets/tsl-logo.png';
 
 export default function Header() {
   const { user, isLogged, logOut } = useContext(UserContext);
   const { user: username } = user;
   const navigate = useNavigate();
 
-  function handleClick() {
+  const handleClick = () => {
     logOut();
     navigate('/');
-  }
+  };
 
   return (
-    <div>
-      <h1>Post It Wall App</h1>
+    <div className="header">
+      <div className="header-title-container">
+        <Link to="/">
+          <img src={tslLogo} alt="logo" className="header-logo" />
+          <h2 className="header-title">Wall App</h2>
+        </Link>
+      </div>
       { isLogged
         ? (
           <div>
             <span>{`Hello, ${username}`}</span>
-            <button type="button" onClick={handleClick}>Log out</button>
+            <Button
+              variant="text"
+              onClick={handleClick}
+            >
+              Log Out
+            </Button>
           </div>
         )
         : (
           <div>
-            <Link to="/signin">
-              <span>Sign In</span>
-            </Link>
-            <Link to="/signup">
-              <span>Sign Up</span>
-            </Link>
+            <Button
+              variant="text"
+            >
+              <Link to="/signin">
+                Sign In
+              </Link>
+            </Button>
+            <Button
+              variant="text"
+            >
+              <Link to="/signup">
+                Sign Up
+              </Link>
+            </Button>
           </div>
         )}
     </div>
