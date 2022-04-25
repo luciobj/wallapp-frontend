@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Button } from '@mui/material';
 import UserContext from '../../context/UserContext';
-import tslLogo from '../../assets/tsl-logo.png';
 import './style.css';
 
 export default function Header() {
@@ -19,7 +18,7 @@ export default function Header() {
   return (
     <div className="header">
       <Link to="/" className="link header-title-container">
-        <img src={tslLogo} alt="logo" className="header-logo" />
+        <img src="tsl-logo.png" alt="logo" className="header-logo" />
         <h2 className="header-title">Wall App</h2>
       </Link>
       { isLogged
