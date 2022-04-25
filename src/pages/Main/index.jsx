@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import {
   getPostItList, postPostIt, putPostIt, deletePostIt,
-} from '../helpers';
-import UserContext from '../context/UserContext';
-import Header from '../components/Header';
-import PostItCard from '../components/PostItCard';
-import Form from '../components/Form';
+} from '../../helpers';
+import UserContext from '../../context/UserContext';
+import Header from '../../components/Header';
+import PostItCard from '../../components/PostItCard';
+import Form from '../../components/Form';
 
 export default function Main() {
   const [postIts, setPostIts] = useState([]);

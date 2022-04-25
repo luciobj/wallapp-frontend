@@ -1,8 +1,8 @@
 import { TextField, Button } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
-import Header from '../components/Header';
-import UserContext from '../context/UserContext';
+import Header from '../../components/Header';
+import UserContext from '../../context/UserContext';
 
 export default function Login() {
   const [username, setUsername] = useState('');

@@ -2,8 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
 import { TextField } from '@mui/material';
-import PostItContext from '../context/PostItContext';
-import UserContext from '../context/UserContext';
+import PostItContext from '../../context/PostItContext';
+import UserContext from '../../context/UserContext';
 
 export default function Form({ handleEdit }) {
   const [title, setTitle] = useState('');

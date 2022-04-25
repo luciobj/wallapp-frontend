@@ -1,8 +1,8 @@
 import { TextField, Button } from '@mui/material';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Header from '../components/Header';
-import { postUser } from '../helpers';
+import Header from '../../components/Header';
+import { postUser } from '../../helpers';
 
 export default function Register() {
   const [username, setUsername] = useState('');

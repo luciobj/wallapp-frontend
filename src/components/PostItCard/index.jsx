@@ -1,8 +1,8 @@
 import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Menu, MenuItem, Button } from '@mui/material';
-import UserContext from '../context/UserContext';
-import PostItContext from '../context/PostItContext';
+import UserContext from '../../context/UserContext';
+import PostItContext from '../../context/PostItContext';
 
 export default function PostItCard({
   postIt, handleDelete,

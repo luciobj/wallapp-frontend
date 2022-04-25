@@ -2,8 +2,8 @@ import React, { useContext } from 'react';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Button } from '@mui/material';
-import UserContext from '../context/UserContext';
-import tslLogo from '../assets/tsl-logo.png';
+import UserContext from '../../context/UserContext';
+import tslLogo from '../../assets/tsl-logo.png';
 
 export default function Header() {
   const { user, isLogged, logOut } = useContext(UserContext);
