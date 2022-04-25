@@ -1,8 +1,9 @@
 import { TextField, Button } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../components/Header';
 import { postUser } from '../../helpers';
+import './style.css';
 
 export default function Register() {
   const [username, setUsername] = useState('');
@@ -110,10 +111,25 @@ export default function Register() {
     }
   };
 
+  useEffect(() => {
+    if (username !== '') {
+      setUsernameError('');
+    }
+    if (email !== '') {
+      setEmailError('');
+    }
+    if (password !== '') {
+      setPasswordError('');
+    }
+    if (passwordConfirmation !== '') {
+      setPassword2Error('');
+    }
+  }, [username, email, password, passwordConfirmation]);
+
   return (
-    <div className="main-container">
+    <div className="register-container">
       <Header />
-      <div className="main-content">
+      <div className="register-content">
         <form className="register-form">
           <h1>Register</h1>
           <TextField

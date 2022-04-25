@@ -1,0 +1,44 @@
+.forms-container {
+  background-color: var(--menu_primary_color);
+  margin: 20px;
+  border: 10px;
+  border-radius: 10px;
+}
+
+.postit-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 15px;
+  padding: 5px;
+}
+
+.forms-input {
+  width: 90%;
+  border-radius: 5px;
+  margin : 10px;
+}
+
+.forms-button {
+  align-self: flex-end;
+}
+
+.forms-container button {
+  margin-bottom: 5px;
+}
+
+@media (min-width: 361px) {
+  .forms-container {
+    min-width: 600px;
+  }
+
+  .postit-form .MuiTextField-root {
+    width: 550px;
+  }
+
+  .forms-container button {
+    margin: 5px;
+  }
+  
+}

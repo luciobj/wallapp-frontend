@@ -1,0 +1,44 @@
+.header {
+  display: flex;
+  position: sticky;
+  z-index: 2;
+  top: 0;
+  justify-content: space-between;
+  align-items: center;
+  text-decoration: none;
+  background-color: var(--menu_primary_color);
+  color: black;
+  height: 10vh;
+}
+
+.header-logo {
+  width: 40px;
+  flex-grow: 0;
+  display: inline-block;
+}
+
+.header-title-container {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.header-title {
+  text-decoration: none;
+  font-size: 20px;
+  margin: 0;
+  margin-left: 5px;
+}
+
+.link {
+  text-decoration: none;
+  color: black;
+}
+
+.link:visited {
+  text-decoration: none;
+  color: black;
+}
+
+@media (min-width: 361px) {
+}

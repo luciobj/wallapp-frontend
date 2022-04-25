@@ -1,0 +1,36 @@
+.register-container {
+  background-color: var(--background_color);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.register-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--menu_primary_color);
+  border-radius: 15px;
+  margin: 20px;
+  padding: 20px;
+  flex-grow: 1;
+}
+
+.register-form button {
+  margin-top: 15px;
+}
+
+@media (min-width: 361px) {
+  .register-form {
+    flex-grow: 0;
+    padding: 40px;
+    }
+}

@@ -6,6 +6,7 @@ import UserContext from '../../context/UserContext';
 import Header from '../../components/Header';
 import PostItCard from '../../components/PostItCard';
 import Form from '../../components/Form';
+import './style.css';
 
 export default function Main() {
   const [postIts, setPostIts] = useState([]);
@@ -65,7 +66,7 @@ export default function Main() {
   return (
     <div className="main-container">
       <Header />
-      <div className="main-content-2">
+      <div className="main-content">
         { isLogged
         && (
           <Form
@@ -76,7 +77,7 @@ export default function Main() {
           ? (
             <div>Your list is Empty!</div>
           ) : (
-            <div className="postit-container">
+            <div className={`postit-container ${!isLogged ? 'unauthed' : ''}`}>
               { postIts.length > 1 && postIts.map((postItInfo) => (
                 <PostItCard
                   postIt={postItInfo}

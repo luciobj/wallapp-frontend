@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '@mui/material';
 import UserContext from '../../context/UserContext';
 import tslLogo from '../../assets/tsl-logo.png';
+import './style.css';
 
 export default function Header() {
   const { user, isLogged, logOut } = useContext(UserContext);

@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import Header from '../../components/Header';
 import UserContext from '../../context/UserContext';
+import './style.css';
 
 export default function Login() {
   const [username, setUsername] = useState('');
@@ -68,10 +69,19 @@ export default function Login() {
     }
   }, []);
 
+  useEffect(() => {
+    if (username !== '') {
+      setUsernameError('');
+    }
+    if (password !== '') {
+      setPasswordError('');
+    }
+  }, [username, password]);
+
   return (
-    <div className="main-container">
+    <div className="login-container">
       <Header />
-      <div className="main-content">
+      <div className="login-content">
         <form className="register-form">
           <h1>Login</h1>
           <TextField

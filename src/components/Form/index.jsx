@@ -4,6 +4,7 @@ import Button from '@mui/material/Button';
 import { TextField } from '@mui/material';
 import PostItContext from '../../context/PostItContext';
 import UserContext from '../../context/UserContext';
+import './style.css';
 
 export default function Form({ handleEdit }) {
   const [title, setTitle] = useState('');
@@ -12,15 +13,6 @@ export default function Form({ handleEdit }) {
   const [descriptionError, setDescriptionError] = useState('');
   const { PostItForm, setPostItForm } = useContext(PostItContext);
   const { user: { token } } = useContext(UserContext);
-
-  const handleChange = ({ target }) => {
-    if (target.name === 'title') {
-      setTitle(target.value);
-    }
-    if (target.name === 'description') {
-      setDescription(target.value);
-    }
-  };
 
   function verifyInputs() {
     if (title === '') {
@@ -38,6 +30,15 @@ export default function Form({ handleEdit }) {
     }
     return false;
   }
+
+  const handleChange = ({ target }) => {
+    if (target.name === 'title') {
+      setTitle(target.value);
+    }
+    if (target.name === 'description') {
+      setDescription(target.value);
+    }
+  };
 
   const handleSubmit = () => {
     if (verifyInputs()) {
@@ -57,6 +58,15 @@ export default function Form({ handleEdit }) {
       });
     }
   };
+
+  useEffect(() => {
+    if (title !== '') {
+      setTitleError('');
+    }
+    if (description !== '') {
+      setDescriptionError('');
+    }
+  }, [title, description]);
 
   useEffect(() => {
     setTitle(PostItForm.title);

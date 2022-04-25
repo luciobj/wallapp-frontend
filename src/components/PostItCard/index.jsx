@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Menu, MenuItem, Button } from '@mui/material';
 import UserContext from '../../context/UserContext';
 import PostItContext from '../../context/PostItContext';
+import './style.css';
 
 export default function PostItCard({
   postIt, handleDelete,

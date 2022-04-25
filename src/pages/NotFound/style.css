@@ -1,0 +1,16 @@
+.notfound-container {
+  display: flex;
+  color: white;
+}
+
+.notfound-content{
+  display: flex;
+  background-color: var(--background_color);
+  text-align: center;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 361px) {
+}

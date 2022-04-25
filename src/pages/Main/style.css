@@ -1,0 +1,31 @@
+.main-container {
+  background-color: var(--background_color);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.postit-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (min-width: 361px) {
+  .main-content {
+    justify-content: flex-start;
+  }
+
+  .unauthed {
+    margin-top: 50px;
+  }
+}
