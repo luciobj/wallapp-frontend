@@ -65,30 +65,32 @@ export default function Main() {
   return (
     <div className="main-container">
       <Header />
-      { isLogged
-      && (
-        <Form
-          handleEdit={handleEdit}
-        />
-      ) }
-      { isLoading
-        ? (
-          <div>Your list is Empty!</div>
-        ) : (
-          <div className="postit-container">
-            { postIts.length > 1 && postIts.map((postItInfo) => (
-              <PostItCard
-                postIt={postItInfo}
-                handleDelete={handleDelete}
-                key={postItInfo.id}
-              />
-            )) }
-          </div>
-        )}
-      <div hidden={hidden}>
-        <span>
-          {errorMessage}
-        </span>
+      <div className="main-content-2">
+        { isLogged
+        && (
+          <Form
+            handleEdit={handleEdit}
+          />
+        ) }
+        { isLoading
+          ? (
+            <div>Your list is Empty!</div>
+          ) : (
+            <div className="postit-container">
+              { postIts.length > 1 && postIts.map((postItInfo) => (
+                <PostItCard
+                  postIt={postItInfo}
+                  handleDelete={handleDelete}
+                  key={postItInfo.id}
+                />
+              )) }
+            </div>
+          )}
+        <div hidden={hidden}>
+          <span>
+            {errorMessage}
+          </span>
+        </div>
       </div>
     </div>
   );

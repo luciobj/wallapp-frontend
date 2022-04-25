@@ -17,12 +17,10 @@ export default function Header() {
 
   return (
     <div className="header">
-      <div className="header-title-container">
-        <Link to="/">
-          <img src={tslLogo} alt="logo" className="header-logo" />
-          <h2 className="header-title">Wall App</h2>
-        </Link>
-      </div>
+      <Link to="/" className="link header-title-container">
+        <img src={tslLogo} alt="logo" className="header-logo" />
+        <h2 className="header-title">Wall App</h2>
+      </Link>
       { isLogged
         ? (
           <div>
@@ -30,6 +28,7 @@ export default function Header() {
             <Button
               variant="text"
               onClick={handleClick}
+              className="link"
             >
               Log Out
             </Button>
@@ -40,14 +39,14 @@ export default function Header() {
             <Button
               variant="text"
             >
-              <Link to="/signin">
+              <Link to="/signin" className="link">
                 Sign In
               </Link>
             </Button>
             <Button
               variant="text"
             >
-              <Link to="/signup">
+              <Link to="/signup" className="link">
                 Sign Up
               </Link>
             </Button>

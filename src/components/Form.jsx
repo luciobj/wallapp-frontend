@@ -65,7 +65,7 @@ export default function Form({ handleEdit }) {
 
   return (
     <div className="forms-container">
-      <form>
+      <form className="postit-form">
         <TextField
           name="title"
           label="Title"
@@ -74,26 +74,32 @@ export default function Form({ handleEdit }) {
           onChange={handleChange}
           error={titleError !== ''}
           helperText={titleError}
+          margin="normal"
+          size="small"
         />
         <TextField
           name="description"
-          label="description"
+          label="Description"
           variant="outlined"
           value={description}
           onChange={handleChange}
           error={descriptionError !== ''}
           helperText={descriptionError}
+          className="input"
+          margin="normal"
+          size="small"
+          multiline="true"
+          minRows="3"
+          maxRows="3"
         />
-        <div>
-          <Button
-            variant="contained"
-            onClick={handleSubmit}
-            className="forms-button"
-            size="small"
-          >
-            {PostItForm.id !== 0 ? 'Edit' : 'Add'}
-          </Button>
-        </div>
+        <Button
+          variant="contained"
+          onClick={handleSubmit}
+          className="forms-button"
+          size="small"
+        >
+          {PostItForm.id !== 0 ? 'Edit' : 'Add'}
+        </Button>
       </form>
     </div>
   );

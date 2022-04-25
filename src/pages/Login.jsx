@@ -71,8 +71,8 @@ export default function Login() {
   return (
     <div className="main-container">
       <Header />
-      <div className="login-form">
-        <form>
+      <div className="main-content">
+        <form className="register-form">
           <h1>Login</h1>
           <TextField
             name="username"
@@ -82,6 +82,8 @@ export default function Login() {
             onChange={handleChange}
             error={usernameError !== ''}
             helperText={usernameError}
+            margin="normal"
+            size="small"
           />
           <TextField
             name="password"
@@ -92,10 +94,13 @@ export default function Login() {
             onChange={handleChange}
             error={passwordError !== ''}
             helperText={passwordError}
+            margin="normal"
+            size="small"
           />
           <Button
             variant="contained"
             onClick={handleClick}
+            className="login-button"
           >
             Sign In
           </Button>

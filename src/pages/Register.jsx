@@ -113,8 +113,8 @@ export default function Register() {
   return (
     <div className="main-container">
       <Header />
-      <div className="register-form">
-        <form>
+      <div className="main-content">
+        <form className="register-form">
           <h1>Register</h1>
           <TextField
             name="username"
@@ -125,6 +125,8 @@ export default function Register() {
             error={usernameError !== ''}
             helperText={usernameError}
             disabled={disabled}
+            margin="normal"
+            size="small"
           />
           <TextField
             name="email"
@@ -135,6 +137,8 @@ export default function Register() {
             error={emailError !== ''}
             helperText={emailError}
             disabled={disabled}
+            margin="normal"
+            size="small"
           />
           <TextField
             name="password"
@@ -146,6 +150,8 @@ export default function Register() {
             error={passwordError !== ''}
             helperText={passwordError}
             disabled={disabled}
+            margin="normal"
+            size="small"
           />
           <TextField
             name="password"
@@ -157,10 +163,13 @@ export default function Register() {
             error={password2Error !== ''}
             helperText={password2Error}
             disabled={disabled}
+            margin="normal"
+            size="small"
           />
           <Button
             variant="contained"
             onClick={handleClick}
+            className="login-button"
           >
             Sign up
           </Button>
