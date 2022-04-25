@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Button } from '@mui/material';
+import { Menu, MenuItem, Button } from '@mui/material';
 import UserContext from '../context/UserContext';
 import PostItContext from '../context/PostItContext';
 
@@ -8,22 +8,25 @@ export default function PostItCard({
   postIt, handleDelete,
 }) {
   const { id, title, description } = postIt;
-  const [expand, setExpand] = useState(true);
   const { setPostItForm } = useContext(PostItContext);
   const { user: { token }, isLogged } = useContext(UserContext);
-
-  const handleExpand = () => {
-    setExpand(!expand);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const expand = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
   };
 
   const handleEdit = () => {
     setPostItForm(postIt);
-    setExpand(!expand);
+    handleClose();
   };
 
   const handleDeleteBtn = () => {
     handleDelete(id, token);
-    setExpand(!expand);
+    handleClose();
   };
 
   return (
@@ -34,30 +37,30 @@ export default function PostItCard({
     >
       <div className="postit-header">
         { isLogged && (
-          <div className="postit-menu">
+          <div className="expand-menu">
             <Button
-              variant="contained"
-              onClick={handleExpand}
+              aria-controls={expand ? 'basic-menu' : undefined}
+              aria-haspopup="true"
+              aria-expanded={expand ? 'true' : undefined}
+              onClick={handleClick}
+              className="expand-btn"
             >
               ...
             </Button>
+            <Menu
+              id="basic-menu"
+              anchorEl={anchorEl}
+              open={expand}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={handleEdit}>Edit</MenuItem>
+              <MenuItem onClick={handleDeleteBtn}>Delete</MenuItem>
+            </Menu>
           </div>
-        ) }
-        <div hidden={expand}>
-          <Button
-            onClick={handleEdit}
-          >
-            Edit
-          </Button>
-          <Button
-            onClick={handleDeleteBtn}
-          >
-            Delete
-          </Button>
-        </div>
+        )}
       </div>
-      <h4>{ title }</h4>
-      <div>
+      <div className="postit-text">
+        <h4>{ title }</h4>
         <p>{ description }</p>
       </div>
     </div>
