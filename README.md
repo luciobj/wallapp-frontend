@@ -1,4 +1,4 @@
-# Wall App - Backend
+# Wall App - Frontend
 
 ## Context
 
@@ -46,11 +46,11 @@ You can also access the api by accessing the address `http://localhost:3000/api/
 
 ## Previews
 
-[Preview Mobile Main Unauth]('./assets/preview1.png')
-[Preview Mobile Login]('./assets/preview2.png')
-[Preview Mobile Register]('./assets/preview3.png')
-[Preview Mobile Main Auth]('./assets/preview4.png')
-[Preview Main Unauth]('./assets/preview5.png')
-[Preview Login]('./assets/preview6.png')
-[Preview Register]('./assets/preview7.png')
-[Preview Main Auth]('./assets/preview8.png')
+[Preview Mobile Main Unauth]('./public/preview-mobile-main-unauth.png')
+[Preview Mobile Login]('./public/preview-mobile-login.png')
+[Preview Mobile Register]('./public/preview-mobile-register.png')
+[Preview Mobile Main Auth]('./public/preview-mobile-main-auth.png')
+[Preview Main Unauth]('./public/preview-main-unauth.png')
+[Preview Login]('./public/preview-login.png')
+[Preview Register]('./public/preview-register.png')
+[Preview Main Auth]('./public/preview-main-auth.png')
