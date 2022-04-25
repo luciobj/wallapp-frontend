@@ -20,6 +20,11 @@
   margin : 10px;
 }
 
+.postit-form .MuiTextField-root {
+  background-color: var(--menu_secondary_color);
+  border-radius: 5px;
+}
+
 .forms-button {
   align-self: flex-end;
 }

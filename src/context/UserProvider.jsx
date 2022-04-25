@@ -18,13 +18,14 @@ export default function UserProvider({ children }) {
   }, []);
 
   async function logIn(credentials) {
-    const { token } = await authUser(credentials);
-    if (token) {
-      setUser({ user: credentials.username, token });
-      setIsLogged(true);
-      sessionStorage.setItem('user', JSON.stringify({ user: credentials.username, token }));
+    const response = await authUser(credentials);
+    if (response.error) {
+      return response;
     }
-    return token;
+    setUser({ user: credentials.username, token: response.token });
+    setIsLogged(true);
+    sessionStorage.setItem('user', JSON.stringify({ user: credentials.username, token: response.token }));
+    return response;
   }
 
   async function logOut() {

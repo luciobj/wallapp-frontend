@@ -79,7 +79,7 @@ export default function Form({ handleEdit }) {
         <TextField
           name="title"
           label="Title"
-          variant="outlined"
+          variant="filled"
           value={title}
           onChange={handleChange}
           error={titleError !== ''}
@@ -90,7 +90,7 @@ export default function Form({ handleEdit }) {
         <TextField
           name="description"
           label="Description"
-          variant="outlined"
+          variant="filled"
           value={description}
           onChange={handleChange}
           error={descriptionError !== ''}

@@ -1,4 +1,4 @@
-import { TextField, Button } from '@mui/material';
+import { TextField, Button, Alert } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import Header from '../../components/Header';
@@ -10,11 +10,9 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [usernameError, setUsernameError] = useState('');
   const [passwordError, setPasswordError] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-  const [hidden, alterHidden] = useState(true);
+  const [fetchError, setFetchError] = useState('');
   const { isLogged, logIn } = useContext(UserContext);
   const navigate = useNavigate();
-  const TWO_SECONDS = 2000;
 
   const handleChange = ({ target }) => {
     if (target.name === 'username') {
@@ -51,13 +49,9 @@ export default function Login() {
       username,
       password,
     };
-    const token = logIn(credentials);
-    if (token.length < 1) {
-      setErrorMessage('Failed to login, please try again');
-      alterHidden(false);
-      setTimeout(() => {
-        alterHidden(true);
-      }, TWO_SECONDS);
+    const auth = await logIn(credentials);
+    if (auth.error) {
+      setFetchError(auth.error);
       return;
     }
     navigate('/', { replace: true });
@@ -82,12 +76,12 @@ export default function Login() {
     <div className="login-container">
       <Header />
       <div className="login-content">
-        <form className="register-form">
+        <form className="login-form">
           <h1>Login</h1>
           <TextField
             name="username"
             label="Username"
-            variant="outlined"
+            variant="filled"
             value={username}
             onChange={handleChange}
             error={usernameError !== ''}
@@ -99,7 +93,7 @@ export default function Login() {
             name="password"
             type="password"
             label="Password"
-            variant="outlined"
+            variant="filled"
             value={password}
             onChange={handleChange}
             error={passwordError !== ''}
@@ -116,11 +110,11 @@ export default function Login() {
           </Button>
         </form>
       </div>
-      <div hidden={hidden}>
-        <span>
-          {errorMessage}
-        </span>
-      </div>
+      {
+        fetchError !== '' && (
+          <Alert severity="error">{fetchError}</Alert>
+        )
+      }
     </div>
   );
 }

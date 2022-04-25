@@ -24,13 +24,30 @@
   flex-grow: 1;
 }
 
+.register-content .MuiTextField-root {
+  background-color: var(--menu_secondary_color);
+  border-radius: 5px;
+}
+
 .register-form button {
   margin-top: 15px;
+}
+
+.register-container .MuiAlert-root {
+  position: absolute;
+  bottom: 0;
+  width: 100vw;
 }
 
 @media (min-width: 361px) {
   .register-form {
     flex-grow: 0;
     padding: 40px;
-    }
+  }
+
+  .register-container .MuiAlert-root {
+    bottom: 80px;
+    width: auto;
+    align-self: center;
+  }
 }

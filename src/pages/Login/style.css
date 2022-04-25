@@ -24,13 +24,30 @@
   flex-grow: 1;
 }
 
+.login-content .MuiTextField-root {
+  background-color: var(--menu_secondary_color);
+  border-radius: 5px;
+}
+
 .login-form button {
   margin-top: 15px;
+}
+
+.login-container .MuiAlert-root {
+  position: absolute;
+  bottom: 0;
+  width: 100vw;
 }
 
 @media screen  and (min-width: 361px) {
   .login-form {
   flex-grow: 0;
   padding: 40px;
+  }
+
+  .login-container .MuiAlert-root {
+    bottom: 125px;
+    width: auto;
+    align-self: center;
   }
 }

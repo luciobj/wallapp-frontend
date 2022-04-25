@@ -1,4 +1,4 @@
-import { TextField, Button } from '@mui/material';
+import { TextField, Button, Alert } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../components/Header';
@@ -14,9 +14,8 @@ export default function Register() {
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [password2Error, setPassword2Error] = useState('');
-  const [error, setError] = useState('');
-  const [hidden, alterHidden] = useState(true);
-  const [success, setSuccess] = useState(true);
+  const [fetchError, setFetchError] = useState('');
+  const [success, setSuccess] = useState(false);
   const [disabled, setDisabled] = useState(false);
   const navigate = useNavigate();
   const TWO_SECONDS = 2000;
@@ -69,7 +68,7 @@ export default function Register() {
     setEmail('');
     setPassword('');
     setPasswordConfirmation('');
-    setError('');
+    setFetchError('');
     setSuccess(false);
   };
 
@@ -93,20 +92,19 @@ export default function Register() {
         password,
         password2: passwordConfirmation,
       };
+      setFetchError('');
+      setDisabled(true);
       const post = await postUser(newUser);
       if (post.id) {
-        setSuccess(false);
-        setDisabled(true);
+        setFetchError('');
+        setSuccess(true);
         setTimeout(() => {
           resetStates();
-          navigate('/');
+          navigate('/signin');
         }, TWO_SECONDS);
       } else {
-        setError(post.error);
-        alterHidden(false);
-        setTimeout(() => {
-          alterHidden(true);
-        }, TWO_SECONDS);
+        setDisabled(false);
+        setFetchError(post.error);
       }
     }
   };
@@ -135,7 +133,7 @@ export default function Register() {
           <TextField
             name="username"
             label="Username"
-            variant="outlined"
+            variant="filled"
             value={username}
             onChange={handleChange}
             error={usernameError !== ''}
@@ -147,7 +145,7 @@ export default function Register() {
           <TextField
             name="email"
             label="email@email.com"
-            variant="outlined"
+            variant="filled"
             value={email}
             onChange={handleChange}
             error={emailError !== ''}
@@ -160,7 +158,7 @@ export default function Register() {
             name="password"
             type="password"
             label="Password"
-            variant="outlined"
+            variant="filled"
             value={password}
             onChange={handleChange}
             error={passwordError !== ''}
@@ -170,10 +168,10 @@ export default function Register() {
             size="small"
           />
           <TextField
-            name="password"
+            name="passwordConfirmation"
             type="password"
             label="Confirm Password"
-            variant="outlined"
+            variant="filled"
             value={passwordConfirmation}
             onChange={handleChange}
             error={password2Error !== ''}
@@ -191,16 +189,16 @@ export default function Register() {
           </Button>
         </form>
       </div>
-      <div hidden={hidden}>
-        <span>
-          {error}
-        </span>
-      </div>
-      <div hidden={success}>
-        <span>
+      {
+        fetchError !== '' && (
+          <Alert severity="error">{fetchError}</Alert>
+        )
+      }
+      { success && (
+        <Alert severity="success">
           Success! You are now registered
-        </span>
-      </div>
+        </Alert>
+      ) }
     </div>
   );
 }
