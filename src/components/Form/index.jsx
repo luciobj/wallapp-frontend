@@ -95,10 +95,9 @@ export default function Form({ handleEdit }) {
           onChange={handleChange}
           error={descriptionError !== ''}
           helperText={descriptionError}
-          className="input"
           margin="normal"
           size="small"
-          multiline="true"
+          multiline
           minRows="3"
           maxRows="3"
         />
