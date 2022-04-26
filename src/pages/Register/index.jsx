@@ -1,5 +1,7 @@
-import { TextField, Button, Alert } from '@mui/material';
 import React, { useState, useEffect } from 'react';
+import {
+  TextField, Button, Alert,
+} from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../components/Header';
 import { postUser } from '../../helpers';
@@ -180,13 +182,21 @@ export default function Register() {
             margin="normal"
             size="small"
           />
-          <Button
-            variant="contained"
-            onClick={handleClick}
-            className="login-button"
-          >
-            Sign up
-          </Button>
+          {
+            disabled ? (
+              <Button variant="contained">
+                Loading...
+              </Button>
+            ) : (
+              <Button
+                variant="contained"
+                onClick={handleClick}
+                className="login-button"
+              >
+                Sign up
+              </Button>
+            )
+          }
         </form>
       </div>
       {

@@ -41,4 +41,11 @@
 }
 
 @media (min-width: 361px) {
+  .header-title-container {
+    margin-left: 50px;
+  }
+
+  .header-links {
+    margin-right: 52px;
+  }
 }

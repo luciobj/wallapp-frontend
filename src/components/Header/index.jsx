@@ -23,7 +23,7 @@ export default function Header() {
       </Link>
       { isLogged
         ? (
-          <div>
+          <div className="header-links">
             <span>{`Hello, ${username}`}</span>
             <Button
               variant="text"
@@ -35,7 +35,7 @@ export default function Header() {
           </div>
         )
         : (
-          <div>
+          <div className="header-links">
             <Button
               variant="text"
             >
