@@ -49,7 +49,7 @@ You can also access the api by accessing the address `http://localhost:3000/api/
 You can run the tests created for this application by running the script
 
 ```bash
-docker-compose exec web pytest
+npm test
 ```
 
 Alternatively, you can run the tests opening cypress to acompany it running.
