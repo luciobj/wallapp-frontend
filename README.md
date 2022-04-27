@@ -44,6 +44,20 @@ By accessing the application on the adress `http://localhost:3000/`, you can you
 
 You can also access the api by accessing the address `http://localhost:3000/api/get/`, if you have the backend running.
 
+## Testing
+
+You can run the tests created for this application by running the script
+
+```bash
+docker-compose exec web pytest
+```
+
+Alternatively, you can run the tests opening cypress to acompany it running.
+
+```bash
+npx cypress:open
+```
+
 ## Previews
 
 ![Preview Mobile Main Unauth](./public/preview-mobile-main-unauth.png)
