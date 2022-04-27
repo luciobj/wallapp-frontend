@@ -46,7 +46,7 @@
   }
 
   .register-container .MuiAlert-root {
-    bottom: 80px;
+    bottom: 5%;
     width: auto;
     align-self: center;
   }
