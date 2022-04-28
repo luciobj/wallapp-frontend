@@ -57,8 +57,9 @@ export default function Login() {
       setTimeout(() => {
         setFetchError('');
       }, delayToClearError);
+    } else {
+      navigate('/', { replace: true });
     }
-    navigate('/', { replace: true });
   };
 
   useEffect(() => {
