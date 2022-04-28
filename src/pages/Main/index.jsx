@@ -14,7 +14,7 @@ export default function Main() {
   const { user, isLogged } = useContext(UserContext);
   const [errorMessage, setErrorMessage] = useState('');
   const [hidden, alterHidden] = useState(true);
-  const TWO_SECONDS = 2000;
+  const delayToClearHelperText = 2000;
 
   async function updatePostIts(token) {
     setIsLoading(true);
@@ -40,7 +40,7 @@ export default function Main() {
       alterHidden(false);
       setTimeout(() => {
         alterHidden(true);
-      }, TWO_SECONDS);
+      }, delayToClearHelperText);
       return;
     }
     updatePostIts(token);
@@ -53,7 +53,7 @@ export default function Main() {
       alterHidden(false);
       setTimeout(() => {
         alterHidden(true);
-      }, TWO_SECONDS);
+      }, delayToClearHelperText);
       return;
     }
     updatePostIts(token);
@@ -78,7 +78,7 @@ export default function Main() {
             <div>Your list is Empty!</div>
           ) : (
             <div className={`postit-container ${!isLogged ? 'unauthed' : ''}`}>
-              { postIts.length > 1 && postIts.map((postItInfo) => (
+              { postIts.length && postIts.map((postItInfo) => (
                 <PostItCard
                   postIt={postItInfo}
                   handleDelete={handleDelete}

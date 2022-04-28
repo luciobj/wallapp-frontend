@@ -13,6 +13,7 @@ export default function Login() {
   const [fetchError, setFetchError] = useState('');
   const { isLogged, logIn } = useContext(UserContext);
   const navigate = useNavigate();
+  const delayToClearError = 4000;
 
   const handleChange = ({ target }) => {
     if (target.name === 'username') {
@@ -41,7 +42,8 @@ export default function Login() {
     return false;
   };
 
-  const handleClick = async () => {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     if (!verifyInputs()) {
       return;
     }
@@ -52,7 +54,9 @@ export default function Login() {
     const auth = await logIn(credentials);
     if (auth.error) {
       setFetchError(auth.error);
-      return;
+      setTimeout(() => {
+        setFetchError('');
+      }, delayToClearError);
     }
     navigate('/', { replace: true });
   };
@@ -63,20 +67,22 @@ export default function Login() {
     }
   }, []);
 
+  const resetError = (value, callback) => {
+    if (value !== '') {
+      callback('');
+    }
+  };
+
   useEffect(() => {
-    if (username !== '') {
-      setUsernameError('');
-    }
-    if (password !== '') {
-      setPasswordError('');
-    }
+    resetError(username, setUsernameError);
+    resetError(password, setPasswordError);
   }, [username, password]);
 
   return (
     <div className="login-container">
       <Header />
       <div className="login-content">
-        <form className="login-form">
+        <form className="login-form" onSubmit={handleSubmit}>
           <h1>Login</h1>
           <TextField
             name="username"
@@ -103,7 +109,7 @@ export default function Login() {
           />
           <Button
             variant="contained"
-            onClick={handleClick}
+            type="submit"
             className="login-button"
           >
             Sign In

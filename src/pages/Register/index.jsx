@@ -20,7 +20,8 @@ export default function Register() {
   const [success, setSuccess] = useState(false);
   const [disabled, setDisabled] = useState(false);
   const navigate = useNavigate();
-  const TWO_SECONDS = 2000;
+  const delayToClearHelperText = 2000;
+  const delayToClearError = 4000;
 
   const verifyUsername = () => {
     if (username.length < 1) {
@@ -86,7 +87,8 @@ export default function Register() {
     }
   };
 
-  const handleClick = async () => {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     if (verifyInputs()) {
       const newUser = {
         username,
@@ -103,34 +105,35 @@ export default function Register() {
         setTimeout(() => {
           resetStates();
           navigate('/signin');
-        }, TWO_SECONDS);
+        }, delayToClearHelperText);
       } else {
         setDisabled(false);
         setFetchError(post.error);
+        setTimeout(() => {
+          setFetchError('');
+        }, delayToClearError);
       }
     }
   };
 
+  const resetError = (value, callback) => {
+    if (value !== '') {
+      callback('');
+    }
+  };
+
   useEffect(() => {
-    if (username !== '') {
-      setUsernameError('');
-    }
-    if (email !== '') {
-      setEmailError('');
-    }
-    if (password !== '') {
-      setPasswordError('');
-    }
-    if (passwordConfirmation !== '') {
-      setPassword2Error('');
-    }
+    resetError(username, setUsernameError);
+    resetError(email, setEmailError);
+    resetError(password, setPasswordError);
+    resetError(passwordConfirmation, setPassword2Error);
   }, [username, email, password, passwordConfirmation]);
 
   return (
     <div className="register-container">
       <Header />
       <div className="register-content">
-        <form className="register-form">
+        <form className="register-form" onSubmit={handleSubmit}>
           <h1>Register</h1>
           <TextField
             name="username"
@@ -190,7 +193,7 @@ export default function Register() {
             ) : (
               <Button
                 variant="contained"
-                onClick={handleClick}
+                type="submit"
                 className="login-button"
               >
                 Sign up
