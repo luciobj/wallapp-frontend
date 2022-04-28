@@ -12,8 +12,8 @@ The design of this application is based on [this figma](https://www.figma.com/fi
 
 ## Requirements
 
-- node.js
-- npm
+- node.js v16.14.0
+- npm v8.3.1
 
 ## Installation
 
