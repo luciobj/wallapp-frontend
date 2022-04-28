@@ -13,6 +13,11 @@
   flex-grow: 1;
 }
 
+.empty-list {
+  color: white;
+  margin-top: 100px;
+}
+
 .postit-container {
   display: flex;
   flex-wrap: wrap;

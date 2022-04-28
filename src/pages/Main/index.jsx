@@ -75,7 +75,7 @@ export default function Main() {
         ) }
         { isLoading
           ? (
-            <div>Your list is Empty!</div>
+            <p className="empty-list">You don`t have any Post Its in your wall yet!</p>
           ) : (
             <div className={`postit-container ${!isLogged ? 'unauthed' : ''}`}>
               { postIts.length && postIts.map((postItInfo) => (
