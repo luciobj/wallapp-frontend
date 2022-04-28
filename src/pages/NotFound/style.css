@@ -1,6 +1,8 @@
 .notfound-container {
   display: flex;
   color: white;
+  height: 100vh;
+  flex-direction: column;
 }
 
 .notfound-content{
