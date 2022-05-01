@@ -109,6 +109,9 @@ export default function Register() {
       } else {
         setDisabled(false);
         setFetchError(post.error);
+        if (post.error === '') {
+          setFetchError('Please enter a valid email');
+        }
         setTimeout(() => {
           setFetchError('');
         }, delayToClearError);
